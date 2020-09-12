@@ -1,6 +1,5 @@
-# Renovate
+# Helm-Chart Repo
 
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ornias1993/helm-charts?style=for-the-badge)](https://github.com/ornias1993/helm-charts/releases/latest)
 [![License](https://img.shields.io/github/license/ornias1993/helm-charts?style=for-the-badge)](https://opensource.org/licenses/AGPL-3.0)
 
 Automated dependency updates. Multi-platform and multi-language.
