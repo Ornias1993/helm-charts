@@ -2689,4 +2689,29 @@ entries:
     urls:
     - https://github.com/renovatebot/helm-charts/releases/download/renovate-19.200.0/renovate-19.200.0.tgz
     version: 19.200.0
+  traefik:
+  - apiVersion: v2
+    appVersion: 2.2.8
+    created: "2020-09-12T19:55:55.649855857Z"
+    description: A Traefik based Kubernetes ingress controller
+    digest: 2a03ec360ff2efd7109e904a849f070089d4cccc176fedcc5af0f04981496209
+    home: https://traefik.io/
+    icon: https://raw.githubusercontent.com/containous/traefik/v2.2/docs/content/assets/img/traefik.logo.png
+    keywords:
+    - traefik
+    - ingress
+    maintainers:
+    - email: emile@vauge.com
+      name: emilevauge
+    - email: daniel.tomcej@gmail.com
+      name: dtomcej
+    - email: ludovic@containo.us
+      name: ldez
+    name: traefik
+    sources:
+    - https://github.com/containous/traefik
+    type: application
+    urls:
+    - https://github.com/Ornias1993/helm-charts/releases/download/traefik-9.1.1/traefik-9.1.1.tgz
+    version: 9.1.1
 generated: "2020-04-07T12:00:50.186125398Z"
