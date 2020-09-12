@@ -9,7 +9,7 @@ Bitwarden_rs is an unofficial Bitwarden compatible server written in Rust. For m
 The default installation will deploy one bitwarden_rs instance using a SQLite database without persistence. All data will be lost if the pod is deleted.
 
 ```bash
-helm install mybitwardenrs gissilabs/bitwardenrs
+helm install bitwarden ornias1993/bitwardenrs
 ```
 
 See options below to customize the deployment.
