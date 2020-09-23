@@ -1,60 +1,28 @@
-name: Test Charts
-
-on:
-  push:
-    branches:
-      - dev
-    paths:
-      - 'charts/**'
-  pull_request:
-    paths:
-      - 'charts/**'
-
+name: Lint and Test Charts
+on: [push, pull_request]
 jobs:
-  kubeval-chart:
+  lint-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        k8s:
-          - v1.18.6
-          - v1.19.1
-        chart:
-          - bitwardenrs
-          - traefik
-          - heimdall
-          - organizr
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Helm2Kube conversion
-        run: helm template --values "charts/${{ matrix.chart }}/ci/ci-values.yaml" "charts/${{ matrix.chart }}" --output-dir tmp/${{ matrix.k8s }}/${{ matrix.chart }}
-      - name: Run kubeval
-        uses: instrumenta/kubeval-action@master
+        uses: actions/checkout@v2
+      - name: Fetch history
+        run: |
+          git fetch --prune --unshallow;
+          echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
+      - name: Run chart-testing (lint)
+        id: lint
+        uses: helm/chart-testing-action@v1.0.0
+        if: "! contains(env.commitmsg, '[skip lint]')"
         with:
-          version: ${{ matrix.k8s }}
-          files: tmp/${{ matrix.k8s }}/${{ matrix.chart }}
-          strict: true
-          ignore_missing_schemas: true
-
-  install-chart:
-    name: install-chart
-    runs-on: ubuntu-latest
-    needs:
-      - kubeval-chart
-    strategy:
-      matrix:
-        k8s:
-          - v1.18.6
-          - v1.19.0
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Create kind ${{ matrix.k8s }} cluster
-        uses: helm/kind-action@master
-        with:
-          node_image: kindest/node:${{ matrix.k8s }}
+          command: lint
+          config: ct.yaml
+      - name: Create kind cluster
+        uses: helm/kind-action@v1.0.0
+        if: "steps.lint.outputs.changed == 'true' && ! contains(env.commitmsg, '[skip install]')"
       - name: Run chart-testing (install)
-        uses: helm/chart-testing-action@master
+        uses: helm/chart-testing-action@v1.0.0
+        if: "steps.lint.outputs.changed == 'true' && ! contains(env.commitmsg, '[skip install]')"
         with:
           command: install
-          config: .github/ct.yaml
+          config: ct.yaml
