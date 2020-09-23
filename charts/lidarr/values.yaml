@@ -1,0 +1,10 @@
+# Default values for lidarr.
+
+lidarr:
+  image:
+    organization: linuxserver
+    repository: lidarr
+    pullPolicy: IfNotPresent
+    tag: 0.7.1.1785-ls18
+  service:
+    port: 8686

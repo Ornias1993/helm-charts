@@ -1,0 +1,21 @@
+apiVersion: v2
+name: radarr
+description: A fork of Sonarr to work with movies à la Couchpotato
+type: application
+version: 6.0.0
+appVersion: 3.0.0.3591
+keywords:
+  - radarr
+home: https://github.com/k8s-at-home/charts/tree/master/charts/radarr
+icon: https://github.com/Radarr/Radarr/blob/aphrodite/Logo/512.png?raw=true
+sources:
+  - https://github.com/Radarr/Radarr
+  - https://hub.docker.com/r/linuxserver/radarr
+maintainers:
+  - name: DirtyCajunRice
+    email: nick@cajun.pro
+dependencies:
+  - name: media-common
+    repository: https://k8s-at-home.com/charts/
+    version: ~1.0.0
+    alias: radarr

@@ -1,0 +1,10 @@
+# Default values for radarr.
+
+radarr:
+  image:
+    organization: linuxserver
+    repository: radarr
+    pullPolicy: IfNotPresent
+    tag: 3.0.0.3624-ls21
+  service:
+    port: 7878

@@ -1,0 +1,10 @@
+# Default values for tautulli.
+
+tautulli:
+  image:
+    organization: tautulli
+    repository: tautulli
+    pullPolicy: IfNotPresent
+    tag: v2.5.4
+  service:
+    port: 8181
